@@ -8,6 +8,4 @@ Python script send.py sends a JSON to queue "q"
 Python script receiver.py receives all messages in queue "q1"
 
 In the VNET there are three subnets for
-service bus
-logic app
-bastin VM.
+service bus, logic app, bastin VM.
