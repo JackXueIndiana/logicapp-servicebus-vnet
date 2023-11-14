@@ -1,0 +1,57 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Send_message": {
+                "inputs": {
+                    "parameters": {
+                        "entityName": "zediq",
+                        "message": {
+                            "contentData": {
+                                "age": 30,
+                                "email": "johndoe@example.com",
+                                "id": 1234,
+                                "name": "John Doe"
+                            },
+                            "contentType": "application/Json"
+                        }
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "serviceBus",
+                        "operationId": "sendMessage",
+                        "serviceProviderId": "/serviceProviders/serviceBus"
+                    }
+                },
+                "runAfter": {},
+                "type": "ServiceProvider"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "Time_Trigger": {
+                "inputs": {
+                    "body": {
+                        "active": true,
+                        "config": {
+                            "url": "@{listCallbackUrl()}"
+                        },
+                        "entity": "times",
+                        "name": "Power-Automate Time Trigger"
+                    },
+                    "headers": {
+                        "workspace-id": "timerws"
+                    },
+                    "host": {
+                        "connection": {
+                            "referenceName": "timeghost-2"
+                        }
+                    },
+                    "path": "/register_webhook/times"
+                },
+                "type": "ApiConnectionWebhook"
+            }
+        }
+    },
+    "kind": "Stateful"
+}
